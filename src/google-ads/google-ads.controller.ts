@@ -3,13 +3,14 @@ import { GoogleAdsService } from './google-ads.service';
 
 @Controller('google-ads')
 export class GoogleAdsController {
-  constructor(private readonly googleAdsService: GoogleAdsService) {}
+    constructor(private readonly googleAdsService: GoogleAdsService) { }
 
-  @Get('campaigns')
-  async getCampaigns(@Query('customerId') customerId: string) {
-    if (!customerId) {
-      throw new BadRequestException('customerId query parameter is required');
+    @Get('campaigns')
+    async getCampaigns(@Query('customerId') customerId: string) {
+        if (!customerId) {
+            throw new BadRequestException('customerId query parameter is required');
+        }
+        console.log("customerId", customerId)
+        return await this.googleAdsService.listCampaigns(customerId);
     }
-    return this.googleAdsService.listCampaigns(customerId);
-  }
 }

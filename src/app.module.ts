@@ -1,15 +1,16 @@
 import { Module } from '@nestjs/common';
+import { AuthController } from './google-ads/auth.controller';
 import { ConfigModule } from '@nestjs/config';
-import { GoogleAdsModule } from './google-ads/google-ads.module';
-import googleAdsConfig from './config/google-ads.config';
+import { GoogleAdsService } from './google-ads/google-ads.service';
+import { GoogleAdsController } from './google-ads/google-ads.controller';
 
 @Module({
-  imports: [
-    ConfigModule.forRoot({
-      isGlobal: true,
-      load: [googleAdsConfig],
-    }),
-    GoogleAdsModule,
-  ],
+    imports: [
+        ConfigModule.forRoot({
+            isGlobal: true,
+        }),
+    ],
+    controllers: [AuthController, GoogleAdsController],
+    providers: [GoogleAdsService],
 })
-export class AppModule {}
+export class AppModule { }
