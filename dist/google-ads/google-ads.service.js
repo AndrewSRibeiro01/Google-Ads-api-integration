@@ -41,7 +41,7 @@ let GoogleAdsService = class GoogleAdsService {
       FROM campaign
       ORDER BY campaign.id
     `;
-        const url = `https://googleads.googleapis.com/v16/customers/${customerId}/googleAds:search`;
+        const url = `https://googleads.googleapis.com/v19/customers/${customerId}/googleAds:search`;
         const response = await axios_1.default.post(url, { query }, {
             headers: {
                 Authorization: `Bearer ${accessToken}`,
