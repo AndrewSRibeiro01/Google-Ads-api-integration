@@ -5,7 +5,8 @@ import googleAdsConfig from './config/google-ads.config';
 import { GoogleAuthService } from './auth/google-auth.service';
 import { GoogleAuthController } from './auth/google-auth.controller';
 import { GoogleAdsService } from './google-ads/google-ads.service';
-
+import { TagManagerController } from './tagmanager/tagmanager.controller';
+import { TagManagerService } from './tagmanager/tagmanager.service';
 
 @Module({
   imports: [
@@ -15,7 +16,7 @@ import { GoogleAdsService } from './google-ads/google-ads.service';
     }),
     GoogleAdsModule,
   ],
-  controllers: [GoogleAuthController],
-  providers: [GoogleAuthService, GoogleAdsService],
+  controllers: [GoogleAuthController, TagManagerController],
+  providers: [GoogleAuthService, GoogleAdsService, TagManagerService],
 })
 export class AppModule { };
