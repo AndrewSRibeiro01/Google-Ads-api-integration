@@ -2,6 +2,10 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { GoogleAdsModule } from './google-ads/google-ads.module';
 import googleAdsConfig from './config/google-ads.config';
+import { GoogleAuthService } from './auth/google-auth.service';
+import { GoogleAuthController } from './auth/google-auth.controller';
+import { GoogleAdsService } from './google-ads/google-ads.service';
+
 
 @Module({
   imports: [
@@ -11,5 +15,7 @@ import googleAdsConfig from './config/google-ads.config';
     }),
     GoogleAdsModule,
   ],
+  controllers: [GoogleAuthController],
+  providers: [GoogleAuthService, GoogleAdsService],
 })
-export class AppModule {}
+export class AppModule { };

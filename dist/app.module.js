@@ -14,6 +14,9 @@ const common_1 = require("@nestjs/common");
 const config_1 = require("@nestjs/config");
 const google_ads_module_1 = require("./google-ads/google-ads.module");
 const google_ads_config_1 = __importDefault(require("./config/google-ads.config"));
+const google_auth_service_1 = require("./auth/google-auth.service");
+const google_auth_controller_1 = require("./auth/google-auth.controller");
+const google_ads_service_1 = require("./google-ads/google-ads.service");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -26,5 +29,8 @@ exports.AppModule = AppModule = __decorate([
             }),
             google_ads_module_1.GoogleAdsModule,
         ],
+        controllers: [google_auth_controller_1.GoogleAuthController],
+        providers: [google_auth_service_1.GoogleAuthService, google_ads_service_1.GoogleAdsService],
     })
 ], AppModule);
+;
