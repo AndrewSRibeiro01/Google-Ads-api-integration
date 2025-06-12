@@ -17,7 +17,6 @@ const google_ads_config_1 = __importDefault(require("./config/google-ads.config"
 const google_auth_service_1 = require("./auth/google-auth.service");
 const google_auth_controller_1 = require("./auth/google-auth.controller");
 const google_ads_service_1 = require("./google-ads/google-ads.service");
-const tagmanager_controller_1 = require("./tagmanager/tagmanager.controller");
 const tagmanager_service_1 = require("./tagmanager/tagmanager.service");
 let AppModule = class AppModule {
 };
@@ -31,7 +30,7 @@ exports.AppModule = AppModule = __decorate([
             }),
             google_ads_module_1.GoogleAdsModule,
         ],
-        controllers: [google_auth_controller_1.GoogleAuthController, tagmanager_controller_1.TagManagerController],
+        controllers: [google_auth_controller_1.GoogleAuthController],
         providers: [google_auth_service_1.GoogleAuthService, google_ads_service_1.GoogleAdsService, tagmanager_service_1.TagManagerService],
     })
 ], AppModule);

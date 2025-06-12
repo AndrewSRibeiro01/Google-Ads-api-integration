@@ -1,33 +1,33 @@
 import { Injectable } from '@nestjs/common';
-import axios from 'axios';
+import { google } from 'googleapis';
 
 @Injectable()
 export class TagManagerService {
-  private readonly baseUrl = 'https://www.googleapis.com/tagmanager/v2';
+  async listAccountsAndContainers(tokens: any) {
+    const auth = new google.auth.OAuth2();
+    auth.setCredentials(tokens);
 
-  async listAccounts(accessToken: string) {
-    const res = await axios.get(`${this.baseUrl}/accounts`, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
-    return res.data.account || [];
-  }
+    const tagmanager = google.tagmanager({ version: 'v2', auth });
 
-  async createContainer(accessToken: string, accountId: string) {
-    const res = await axios.post(
-      `${this.baseUrl}/accounts/${accountId}/containers`,
-      {
-        name: 'Container criado via API',
-        usageContext: ['web'],
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          'Content-Type': 'application/json',
-        },
-      },
-    );
-    return res.data;
+    const accountsRes = await tagmanager.accounts.list();
+    const accounts = accountsRes.data.account;
+
+    const containers = [];
+
+    if (accounts) {
+      for (const account of accounts) {
+        const containersRes = await tagmanager.accounts.containers.list({
+          parent: `accounts/${account.accountId}`,
+        });
+
+        containers.push({
+          accountId: account.accountId,
+          accountName: account.name,
+          containers: containersRes.data.container,
+        });
+      }
+    }
+
+    return containers;
   }
 }

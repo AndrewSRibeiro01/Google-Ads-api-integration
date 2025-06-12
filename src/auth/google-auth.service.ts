@@ -18,8 +18,8 @@ export class GoogleAuthService {
     const scopes = [
       'https://www.googleapis.com/auth/adwords',
       'https://www.googleapis.com/auth/tagmanager.edit.containers',
-      'https://www.googleapis.com/auth/tagmanager.edit.containerversions',
       'https://www.googleapis.com/auth/tagmanager.manage.accounts',
+      'https://www.googleapis.com/auth/tagmanager.readonly',
     ];
 
     return this.oauth2Client.generateAuthUrl({
